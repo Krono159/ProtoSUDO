@@ -1,6 +1,7 @@
 // Require the necessary discord.js classes
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
+const config = require('./config.json');
 
 const fs = require('node:fs');
 const path = require('node:path');
@@ -30,6 +31,14 @@ try {
 
 
 client.once(Events.ClientReady, () => {
+	const channelId = config.channel_id;
+	const channel = client.channels.cache.get(channelId);
+	try {
+		channel.send('Hello there, capitan <@610937299903184898>!  I am online!');
+		console.log('welcome message sent!')
+	} catch (error) {
+		console.log('unable to send online message, but bot is alive. pls check index.js client ready block. error: ',error)
+	}
 	console.log('Ready!');
 });
 

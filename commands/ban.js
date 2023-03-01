@@ -32,7 +32,8 @@ module.exports = {
 			await interaction.followUp('There was an error! check ban module and related pls.');
 			console.log('There was an error! check ban module and related pls.');
 		}*/
-		await interaction.followUp('Command disabled.');
+		await interaction.reply('Command disabled.');
+		console.log('WARNING! COMMAND WAS USED IN PRODUCTION. FEATURE UNSTABLE, PLS FIX.')
 	},
 
 };
