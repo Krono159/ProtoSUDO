@@ -34,7 +34,7 @@ client.once(Events.ClientReady, () => {
 	const channelId = config.channel_id;
 	const channel = client.channels.cache.get(channelId);
 	try {
-		channel.send('beep!');
+		//channel.send('beep!');
 		console.log('welcome message sent!');
 	}
 	catch (error) {
