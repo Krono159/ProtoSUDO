@@ -34,7 +34,7 @@ client.once(Events.ClientReady, () => {
 	const channelId = config.channel_id;
 	const channel = client.channels.cache.get(channelId);
 	try {
-		channel.send('beep!');
+		//channel.send('beep!');
 		console.log('welcome message sent!');
 	}
 	catch (error) {
@@ -65,14 +65,14 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 
-client.on(Events.MessageDelete, async message => {
+/*client.on(Events.MessageDelete, async message => {
 	// Ignore direct messages
 	if (!message.guild) return;
-	/*  cont that might be used in future
+	
 		const fetchedLogs = await message.guild.fetchAuditLogs({
 		limit: 1,
 		type: AuditLogEvent.MessageDelete,
-	});*/
+	});
 	const channel = client.channels.cache.get(DELCHAN_ID);
 
 	try {
@@ -84,6 +84,6 @@ client.on(Events.MessageDelete, async message => {
 	}
 
 
-});
+});*/
 
 client.login(token);
