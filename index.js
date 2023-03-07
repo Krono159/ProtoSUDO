@@ -81,14 +81,9 @@ client.on(Events.MessageCreate, async message => {
 				// console.log('embed created')
 				try {
 					console.log('joined embed send');
-					channel.send({ embeds: [repEmbed] });
-					/* try {
-						message.delete();
-					}
-					catch (error) {
-						console.log('error deleting message . . . ');
-						return
-					}*/
+					channel.send({ content: '<@&559478924090933292> <@&559888553971286027> <@&574479958278406166>', embeds: [repEmbed] });
+					
+				
 				}
 				catch (error) {
 					console.log('cant send embed. pls verify at 89 ', error);
