@@ -38,7 +38,7 @@ client.once(Events.ClientReady, () => {
 	try {
 		//channel.send('beep!');
 		channelle =+ channel;
-		console.log(channelle)
+		console.log(channelle);
 		console.log('welcome should have been sent but this is disabled for production env.!');
 	}
 	catch (error) {
@@ -74,21 +74,16 @@ client.on(Events.MessageCreate, async message => {
 		const dmreq = message.content.slice(8);
 		const usr = REPCHAN_ID;
 		if (!message.inGuild()) {
-			const answremb = new EmbedBuilder().setColor('#ff0000').setTitle('Hemos recibido tu reporte.').setDescription(`Reporte:\n ${dmreq}`);
+			const answremb = new EmbedBuilder().setColor('#0000FF').setTitle('Hemos recibido tu reporte.').setDescription(`Reporte:\n ${dmreq}\n\nPronto un administrador revisara el caso, y de ser necesario se pondrá en contacto contigo`).setFooter({text:'Gracias por confiar en ProtoSUDO!'});
 			const channel = client.channels.cache.get(usr);
-			const repEmbed = new EmbedBuilder().setColor('#ff0000').setTitle('Nuevo reporte.').setDescription(`He recibido un mensaje de ${message.author.tag}:\n ${dmreq}`);
+			const repEmbed = new EmbedBuilder().setColor('#ff0000').setTitle('Nuevo reporte.').setDescription(`He recibido un mensaje de ${message.author.tag}:\n ${dmreq}`).setFooter({text:'protoSUDO v0.0.4C'});
 			try {
 				// console.log('embed created')
 				try {
 					console.log('joined embed send');
-					channel.send({ embeds: [repEmbed] });
-					/* try {
-						message.delete();
-					}
-					catch (error) {
-						console.log('error deleting message . . . ');
-						return
-					}*/
+					channel.send({ content: '<@&559478924090933292> <@&559888553971286027> <@&574479958278406166>', embeds: [repEmbed] });
+					
+				
 				}
 				catch (error) {
 					console.log('cant send embed. pls verify at 89 ', error);
