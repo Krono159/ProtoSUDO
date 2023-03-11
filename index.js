@@ -1,5 +1,5 @@
 // Require the necessary discord.js classes, possibly this would be required in the future: /* AuditLogEvent*/  at const on line 2
-const { Client, Collection, Events, GatewayIntentBits, Partials } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, Partials, ActivityType } = require('discord.js');
 const { token } = require('./tkn.json');
 // const config = require('./config.json');
 // const { DELCHAN_ID } = require('./config.json');
@@ -37,11 +37,8 @@ client.once(Events.ClientReady, () => {
 	client.user.setStatus('dnd')
 	client.user.setActivity(`como banear a krono`,{type: "WATCHING"})
 	client.user.setPresence({
-        game: {
-            name: 'booping around',
-            type: "STREAMING",
-            url: "https://www.twitch.tv/JeffarLandia"
-        }
+		activities: [{ name: `how to ban the gods`, type: ActivityType.Watching }],
+		status: 'dnd',	  
     });
 	try {
 		// channel.send('beep!');
