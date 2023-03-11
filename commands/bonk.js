@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const { EmbedBuilder } = require('discord.js');
 let image = '';
 let text = '';
+let counter = 0;
 let color = '#ffffff';
 module.exports = {
 
@@ -40,6 +41,8 @@ module.exports = {
 		}
 		const logEmbed = new EmbedBuilder().setColor(color).setTitle('**' + text + '**').setImage(image);
 		await interaction.reply({ content: `<@${guilty}> golpeó a ${tgt}`, embeds: [logEmbed] });
+		counter += 1
+		console.log('bonk command has been used '+counter+ ' times since last reboot')
 	},
 
 };
