@@ -9,6 +9,7 @@ const path = require('node:path');
 // const { exit } = require('node:process');
 const { EmbedBuilder } = require('discord.js');
 const { type } = require('node:os');
+console.log(type.toString());
 // const { channel } = require('node:diagnostics_channel');
 
 // initial message
@@ -34,12 +35,12 @@ catch (error) {
 
 // client ready block
 client.once(Events.ClientReady, () => {
-	client.user.setStatus('dnd')
-	client.user.setActivity(`como banear a krono`,{type: "WATCHING"})
+	client.user.setStatus('dnd');
+	client.user.setActivity('como banear a krono', { type: 'WATCHING' });
 	client.user.setPresence({
-		activities: [{ name: `how to ban the gods`, type: ActivityType.Watching }],
-		status: 'dnd',	  
-    });
+		activities: [{ name: 'how to ban the gods', type: ActivityType.Watching }],
+		status: 'available',
+	});
 	try {
 		// channel.send('beep!');
 
@@ -48,7 +49,7 @@ client.once(Events.ClientReady, () => {
 	catch (error) {
 		console.log('unable to send online message, but bot is alive. pls check index.js client ready block. error: ', error);
 	}
-	console.log('yes i fucking am! protoSUDO V0.0.4D has been loaded');
+	console.log('yes i fucking am! protoSUDO V0.0.5RR has been loaded');
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -111,6 +112,21 @@ client.on(Events.MessageCreate, async message => {
 			}
 
 		}
+	}
+	else if (!message.inGuild() && message.author.id.toString() != '911444198329303070') {
+		const answremb = new EmbedBuilder().setColor('#0000FF').setTitle('ProtoSUDO V0.0.05RR').setDescription('Heh, gracias por escribirme! te dejo un video random que tal vez te interese de 6D1ME. Solo haz click en el titulo del embed para ir :3').setURL('https://www.youtube.com/watch?v=oHg5SJYRHA0').setFooter({ text: 'Gracias por confiar en ProtoSUDO! :)C' });
+		try {
+			try {
+				message.author.send({ embeds: [answremb] });
+			}
+			catch (e) {
+				console.log('no se ha podido generar el embed de rickroll, error: ', e);
+			}
+		}
+		catch (error) {
+			console.log('error: cant send message. pls verify', error);
+		}
+
 	}
 
 
