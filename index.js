@@ -10,7 +10,7 @@ const path = require('node:path');
 const { EmbedBuilder } = require('discord.js');
 const { type } = require('node:os');
 console.log(type.toString());
-// const { channel } = require('node:diagnostics_channel');
+ const { channel } = require('node:diagnostics_channel');
 
 // initial message
 console.log('yawn! am i alive?');
@@ -42,9 +42,11 @@ client.once(Events.ClientReady, () => {
 		status: 'available',
 	});
 	try {
-		// channel.send('beep!');
+		const reportchannel = REPCHAN_ID;
+		const chan = client.channels.cache.get(reportchannel);
+		chan.send('Bot is running on local host. Hosting is currently down, if you find any bug, please report it');
 
-		console.log('welcome message should have been sent but this is disabled for production env.!');
+		console.log('warning message sent. bot is running on local host.');
 	}
 	catch (error) {
 		console.log('unable to send online message, but bot is alive. pls check index.js client ready block. error: ', error);
