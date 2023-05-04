@@ -13,6 +13,7 @@ const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
+	console.log(`file ${file} contains a module. loading...`)
 	commands.push(command.data.toJSON());
 }
 
@@ -23,14 +24,14 @@ const rest = new REST({ version: '10' }).setToken(token);
 // and deploy your commands!
 (async () => {
 	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
+		console.log(`se inició la carga de ${commands.length}  comandos! (slash commands).`);
 
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await await rest.put(
 			Routes.applicationCommands(clientId),
 			{ body: commands },
 		);
-		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+		console.log(`Se han cargado satisfactoriamente ${data.length} comandos... por favor ejecutar index.js para iniciar el bot.`);
 	}
 	catch (error) {
 		// And of course, make sure you catch and log any errors!
