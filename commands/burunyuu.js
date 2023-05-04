@@ -11,7 +11,7 @@ module.exports = {
 		.setName('burunyuuu')
 		.setDescription('lets summon neco arc'),
 	async execute(interaction) {
-		let guilty = interaction.member.displayName;
+		const guilty = interaction.member.displayName;
 		const choice = Math.floor(Math.random() * 7) + 1;
 		switch (choice) {
 		case 1:
@@ -39,14 +39,14 @@ module.exports = {
 			image = 'https://media.discordapp.net/attachments/1083903422476079246/1085702465279774782/neco_1.gif';
 			color = 'CCAABB';
 			title = 'Burunyuu~~';
-            console.log(choice);
+			console.log(choice);
 			break;
 
 		case 5:
 			image = 'https://media.discordapp.net/attachments/1083903422476079246/1085701458093146253/neco-arc.gif';
 			color = '#FFABCD';
 			title = 'Burunyuu~~';
-            console.log(choice);
+			console.log(choice);
 			break;
 
 		case 6:
@@ -54,18 +54,18 @@ module.exports = {
 			color = 'DCBAFF';
 			title = 'Burunyuu~~';
 			console.log(choice);
-            break;
+			break;
 		case 7:
 			image = 'https://media.discordapp.net/attachments/1083903422476079246/1085730887271993354/neco-death.gif';
 			title = `NYAAAAAAAAAAAA!  ${guilty} mató a necoark D:` ;
 			color = '#000000';
-            console.log(choice);
+			console.log(choice);
 			break;
 		default:
 			image = 'https://media.discordapp.net/attachments/1083903422476079246/1085703680050868285/neco-arc-cross.gif';
 			color = 'DCBAFF';
 			title = 'Burunyuu~~';
-            console.log('default');
+			console.log('default');
 			break;
 		}
 		const logEmbed = new EmbedBuilder().setColor(color).setTitle(title).setImage(image);

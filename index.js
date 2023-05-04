@@ -1,6 +1,12 @@
 // Require the necessary discord.js classes, possibly this would be required in the future: /* AuditLogEvent*/  at const on line 2
-const { Client, Collection, Events, GatewayIntentBits, Partials, ActivityType } = require('discord.js');
+let modulcount = 0
+const { Client, Collection, Events, GatewayIntentBits, Partials, ActivityType, fetchRandom } = require ('discord.js');
 const { token } = require('./tkn.json');
+const { Client: NbClient } = require('nekos-best.js');
+
+const neko = require('nekos-best.js');
+try{console.log(neko);console.log('neko module has been loaded!')}catch(error){console.log('neko module has not been loaded, error: ',error)}
+
 // const config = require('./config.json');
 // const { DELCHAN_ID } = require('./config.json');
 const { REPCHAN_ID } = require('./config.json');
@@ -9,8 +15,9 @@ const path = require('node:path');
 // const { exit } = require('node:process');
 const { EmbedBuilder } = require('discord.js');
 const { type } = require('node:os');
-console.log(type.toString());
- const { channel } = require('node:diagnostics_channel');
+console.log(type);
+// const { channel } = require('node:diagnostics_channel');
+
 
 // initial message
 console.log('yawn! am i alive?');
@@ -26,8 +33,10 @@ try {
 		const filePath = path.join(commandsPath, file);
 		const command = require(filePath);
 		client.commands.set(command.data.name, command);
-		console.log('Command ', file, ' was loaded successfully');
+		modulcount = modulcount + 1;
+		console.log('Command #'+ modulcount + ': '+ file + ' has been loaded successfully');
 	}
+	
 }
 catch (error) {
 	console.log('pls check command update & exec module');
@@ -35,6 +44,8 @@ catch (error) {
 
 // client ready block
 client.once(Events.ClientReady, () => {
+console.log('\n\n\n'+modulcount + ' modules has been loaded\n\n\n\n')
+	const nekoClient = new NbClient();
 	client.user.setStatus('dnd');
 	client.user.setActivity('como banear a krono', { type: 'WATCHING' });
 	client.user.setPresence({
@@ -42,16 +53,12 @@ client.once(Events.ClientReady, () => {
 		status: 'available',
 	});
 	try {
-		const reportchannel = REPCHAN_ID;
-		const chan = client.channels.cache.get(reportchannel);
-		chan.send('Bot is running on local host. Hosting is currently down, if you find any bug, please report it');
-
-		console.log('warning message sent. bot is running on local host.');
+		console.log('Bot is running on local host.');
 	}
 	catch (error) {
-		console.log('unable to send online message, but bot is alive. pls check index.js client ready block. error: ', error);
+		console.log('unable to send online message, but bot is alive (still running on localhost). pls check index.js client ready block. error: ', error);
 	}
-	console.log('yes i fucking am! protoSUDO V0.0.5RR has been loaded');
+	console.log('yes i fucking am! protoDEV V0.0.8B01 has been loaded with '+ modulcount+ ' modules!');
 });
 
 client.on(Events.InteractionCreate, async interaction => {
