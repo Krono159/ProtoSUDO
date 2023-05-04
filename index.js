@@ -85,12 +85,8 @@ client.on(Events.MessageCreate, async message => {
 			const chan = client.channels.cache.get(reportchannel);
 			const repEmbed = new EmbedBuilder().setColor('#ff0000').setTitle('Nuevo reporte.').setDescription(`He recibido un mensaje de ${message.author.tag}:\n ${dmreq}`).setFooter({ text: 'protoSUDO v0.0.4C' });
 			try {
-				// console.log('embed created')
 				try {
-					console.log('joined embed send');
 					chan.send({ content: '<@&559478924090933292> <@&559888553971286027> <@&574479958278406166>', embeds: [repEmbed] });
-
-
 				}
 				catch (error) {
 					console.log('cant send embed. pls verify at 89 ', error);
@@ -100,7 +96,6 @@ client.on(Events.MessageCreate, async message => {
 				console.log('error: ', error);
 			}
 			try {
-
 				try {
 					message.author.send({ embeds: [answremb] });
 				}
