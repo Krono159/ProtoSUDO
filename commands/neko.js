@@ -12,7 +12,7 @@ module.exports = {
 			let nekoanswer = await ((await nekoClient.fetch('neko', 1)).results[0]);
 			let nekourl = nekoanswer.url;
 			let nekoname = nekoanswer.artist_name;
-			const logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**'+user+'** invocó una neko-girl!').setImage(nekourl).setFooter({text: 'artist: '+ nekoname});
+			const logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**'+user+'** invocó una neko-girl!').setImage(nekourl).setFooter({text: 'artista: '+ nekoname+ ' | K159|MoccaDev'});
 			// console.log(nekoanswer)
 			await interaction.reply({ embeds: [logEmbed] });
 			console.log('Nekotest completed!');

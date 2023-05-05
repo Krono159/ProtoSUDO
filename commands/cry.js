@@ -13,7 +13,7 @@ module.exports = {
 			let nekoUrl = nekoAnswer.url;
 			let nekoName = nekoAnswer.anime_name;
 			//console.log(nekoAnswer)
-			let logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**' + user + '** está llorando :c').setImage(nekoUrl).setFooter({text: 'anime: '+ nekoName});
+			let logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**' + user + '** está llorando :c').setImage(nekoUrl).setFooter({text: 'anime: '+ nekoName+ ' | K159|MoccaDev'});
 			
 			await interaction.reply({ embeds: [logEmbed] });
 			console.log('cry successful. people have cried',counter,' times');

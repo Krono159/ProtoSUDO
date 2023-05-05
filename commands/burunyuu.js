@@ -8,7 +8,7 @@ let color = '';
 module.exports = {
 
 	data: new SlashCommandBuilder()
-		.setName('burunyuuu')
+		.setName('burunyuu')
 		.setDescription('lets summon neco arc'),
 	async execute(interaction) {
 		const guilty = interaction.member.displayName;
@@ -68,7 +68,7 @@ module.exports = {
 			console.log('default');
 			break;
 		}
-		const logEmbed = new EmbedBuilder().setColor(color).setTitle(title).setImage(image);
+		const logEmbed = new EmbedBuilder().setColor(color).setTitle(title).setImage(image).setFooter({text: 'K159 | MoccaDev'});
 		await interaction.reply({ embeds: [logEmbed] });
 
 	},
