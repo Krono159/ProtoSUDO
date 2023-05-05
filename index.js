@@ -5,7 +5,7 @@ const { token } = require('./tkn.json');
 const { Client: NbClient } = require('nekos-best.js');
 
 const neko = require('nekos-best.js');
-try{console.log(neko);console.log('neko module has been loaded!')}catch(error){console.log('neko module has not been loaded, error: ',error)}
+try{console.log('Ignore pls, neko loading...' + neko);console.log('neko module has been loaded!')}catch(error){console.log('neko module has not been loaded, error: ',error)}
 
 // const config = require('./config.json');
 // const { DELCHAN_ID } = require('./config.json');
@@ -15,7 +15,7 @@ const path = require('node:path');
 // const { exit } = require('node:process');
 const { EmbedBuilder } = require('discord.js');
 const { type } = require('node:os');
-console.log(type);
+console.log('ignore pls. type handling.'+type);
 // const { channel } = require('node:diagnostics_channel');
 
 
@@ -27,6 +27,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+//command loader
 try {
 	// command update & exec module
 	for (const file of commandFiles) {
@@ -38,6 +39,7 @@ try {
 	}
 	
 }
+//command loader error handler
 catch (error) {
 	console.log('pls check command update & exec module');
 }
@@ -46,21 +48,22 @@ catch (error) {
 client.once(Events.ClientReady, () => {
 console.log('\n\n\n'+modulcount + ' modules has been loaded\n\n\n\n')
 	const nekoClient = new NbClient();
-	client.user.setStatus('dnd');
-	client.user.setActivity('como banear a krono', { type: 'WATCHING' });
+	try{console.log(nekoClient);console.log('neko module has been loaded!')}catch(error){console.log('neko module has not been loaded, error: ',error)}
+	client.user.setStatus('available');
+	client.user.setActivity('Vigilando la legion del ganso :3', { type: 'WATCHING' });
 	client.user.setPresence({
-		activities: [{ name: 'how to ban the gods', type: ActivityType.Watching }],
+		activities: [{ name: 'como te va a banear un furro', type: ActivityType.Watching }],
 		status: 'available',
 	});
 	try {
-		console.log('Bot is running on local host.');
+		console.log('Bot is running on prod. enviroment.');
 	}
 	catch (error) {
 		console.log('unable to send online message, but bot is alive (still running on localhost). pls check index.js client ready block. error: ', error);
 	}
-	console.log('yes i fucking am! protoDEV V0.0.8B01 has been loaded with '+ modulcount+ ' modules!');
+	console.log('yes i fucking am! protoSUDO V1.0.1mu1 has been loaded with '+ modulcount+ ' modules!');
 });
-
+//command execution
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -74,14 +77,14 @@ client.on(Events.InteractionCreate, async interaction => {
 	catch (error) {
 		console.error(error);
 		if (interaction.replied || interaction.deferred) {
-			await interaction.followUp({ content: 'Hubo un error ejecutando este comando!', ephemeral: true });
+			await interaction.followUp({ content: 'Hubo un error ejecutando este comando!',ephemeral:true});
 		}
 		else {
-			await interaction.reply({ content: 'Hubo un error ejecutando este comando!', ephemeral: true });
+			await interaction.reply({ content: 'Hubo un error ejecutando este comando!',ephemeral:true});
 		}
 	}
 });
-
+//report handling
 client.on(Events.MessageCreate, async message => {
 	// console.log('joined messageCreate at 68');
 	if (message.author.id.toString() != '911444198329303070' && message.content.startsWith('!report')) {
@@ -117,46 +120,13 @@ client.on(Events.MessageCreate, async message => {
 
 		}
 	}
-	else if (!message.inGuild() && message.author.id.toString() != '911444198329303070') {
-		const answremb = new EmbedBuilder().setColor('#0000FF').setTitle('ProtoSUDO V0.0.05RR').setDescription('Heh, gracias por escribirme! te dejo un video random que tal vez te interese de 6D1ME. Solo haz click en el titulo del embed para ir :3').setURL('https://www.youtube.com/watch?v=oHg5SJYRHA0').setFooter({ text: 'Gracias por confiar en ProtoSUDO! :)C' });
-		try {
-			try {
-				message.author.send({ embeds: [answremb] });
-			}
-			catch (e) {
-				console.log('no se ha podido generar el embed de rickroll, error: ', e);
-			}
-		}
-		catch (error) {
-			console.log('error: cant send message. pls verify', error);
-		}
-
+	else{
+		return
 	}
-
-
 });
-
-/*
-module disabled
-client.on(Events.MessageDelete, async message => {
-	// Ignore direct messages
-	if (!message.guild) return;
-
-		const fetchedLogs = await message.guild.fetchAuditLogs({
-		limit: 1,
-		type: AuditLogEvent.MessageDelete,
-	});
-	const channel = client.channels.cache.get(DELCHAN_ID);
-
-	try {
-		const logEmbed = new EmbedBuilder().setColor('#ff0000').setTitle('Message Deleted').setDescription(`un mensaje enviado por ${message.author.name} fue eliminado en ${message.channel}-${message.guild.name}.`).setTimestamp();
-		channel.send({ embeds: [logEmbed] });
-	}
-	catch (error) {
-		console.log(error);
-	}
-
-
-});*/
-
+//client login confirmation 
+client.on('ready', () => {
+	console.log(`Logged in as ${client.user.tag}!`);
+  });
+  
 client.login(token);

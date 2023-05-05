@@ -20,7 +20,7 @@ module.exports = {
 			let nekoanswer = await ((await nekoClient.fetch('hug', 1)).results[0]);
 			let nekoUrl = nekoanswer.url;
 			let nekoName = nekoanswer.anime_name
-			let logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(`**${guilty}** abrazó a ${tgt}`).setImage(nekoUrl).setFooter({text: 'Anime: '+nekoName});
+			let logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(`**${guilty}** abrazó a ${tgt}`).setImage(nekoUrl).setFooter({text: 'anime: '+ nekoName+ ' | K159|MoccaDev'});
 			hugcounter += 1;
 			console.log('hug command has been used ' + hugcounter + ' times since last reboot');
 			await interaction.reply({ embeds: [logEmbed] });

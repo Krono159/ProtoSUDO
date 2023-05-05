@@ -20,7 +20,7 @@ module.exports = {
 			let nekoanswer = await ((await nekoClient.fetch('cuddle', 1)).results[0]);
 			let nekoUrl = nekoanswer.url;
 			let nekoName = nekoanswer.anime_name
-			let logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(` **${guilty}** se acurruca con ${tgt}~`).setImage(nekoUrl).setFooter({text: 'Anime: '+nekoName});
+			let logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(` **${guilty}** se acurruca con ${tgt}~`).setImage(nekoUrl).setFooter({text: 'anime: '+ nekoName+ ' | K159|MoccaDev'});
 			cudcounter += 1;
 			console.log('cuddle command has been used ' + cudcounter + ' times since last reboot');
 			await interaction.reply({ embeds: [logEmbed] });

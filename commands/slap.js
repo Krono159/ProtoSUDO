@@ -20,7 +20,7 @@ module.exports = {
 			let nekoanswer = await ((await nekoClient.fetch('slap', 1)).results[0]);
 			let nekoUrl = nekoanswer.url;
 			let nekoName = nekoanswer.anime_name
-			let logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** le dio una cachetada a ${tgt} D: `).setImage(nekoUrl).setFooter({text: 'Anime: '+nekoName});
+			let logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** le dio una cachetada a ${tgt} D: `).setImage(nekoUrl).setFooter({text: 'anime: '+ nekoName+ ' | K159|MoccaDev'});
 			counter += 1;
 			console.log('bonk command has been used ' + counter + ' times since last reboot');
 			await interaction.reply({  embeds: [logEmbed] });
