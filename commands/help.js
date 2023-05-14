@@ -29,6 +29,7 @@ module.exports = {
         .addFields({name: '/help',value:'abre el ProtoHelp Center'})
         .addFields({name: '/holi',value:'saluda a todos! :3'})
         .addFields({name: '/hug',value:'abraza a alguien'})
+        .addFields({name: '/kick',value:'Patea a alguien!'})
         .addFields({name: '/kill',value:'... no dire nada, solo hazlo'})
         .addFields({name: '/kiss',value:'besa a alguien! (que no sea krono/kaede...)'})
         .addFields({name: '/neko',value:'Traigan las chigas gato!\n este comando muestra un gif aleatorio de una chica-gato'})
