@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { Client: NbClient } = require('nekos-best.js');
 const nekoClient = new NbClient();
-let color = '#ffabcd';
+const color = '#ffabcd';
 let hugcounter = 0;
 module.exports = {
 
@@ -15,12 +15,12 @@ module.exports = {
 				.setRequired(true)),
 	async execute(interaction) {
 		try {
-			let tgt = interaction.options.getUser('target');
-			let guilty = interaction.user.username;
-			let nekoanswer = await ((await nekoClient.fetch('hug', 1)).results[0]);
-			let nekoUrl = nekoanswer.url;
-			let nekoName = nekoanswer.anime_name
-			let logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(`**${guilty}** abrazó a ${tgt}`).setImage(nekoUrl).setFooter({text: 'anime: '+ nekoName+ ' | K159|MoccaDev'});
+			const tgt = interaction.options.getUser('target');
+			const guilty = interaction.user.username;
+			const nekoanswer = await ((await nekoClient.fetch('hug', 1)).results[0]);
+			const nekoUrl = nekoanswer.url;
+			const nekoName = nekoanswer.anime_name;
+			const logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(`**${guilty}** abrazó a ${tgt}`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName + ' | K159|MoccaDev' });
 			hugcounter += 1;
 			console.log('hug command has been used ' + hugcounter + ' times since last reboot');
 			await interaction.reply({ embeds: [logEmbed] });

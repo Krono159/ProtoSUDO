@@ -1,0 +1,138 @@
+// Require the necessary discord.js classes, possibly this would be required in the future: /* AuditLogEvent*/  at const on line 2
+const fs = require('fs');
+const path = require('path');
+const { Client, Collection, Events, GatewayIntentBits, Partials, ActivityType} = require ('discord.js');
+const mysql = require('mysql');
+//const winexpress = require('express-winston');
+const neko = require('nekos-best.js');
+const { token } = require('./tkn.json');
+const { REPCHAN_ID,dbpw,dbname,dbip,dbuser} = require('./config.json');
+// initial message
+const winston = require('winston');
+const logger = winston.createLogger({
+	transports: [
+		new winston.transports.Console(),
+	],
+  });
+
+try {
+	logger.info('Ignore pls, neko loading...' + neko);
+	logger.info('neko module has been loaded!');
+}
+catch (error) {
+	logger.error('neko module has not been loaded, error: ', error);
+}
+logger.info('yawn! am i alive?');
+// instance creation
+let modulcount = 0;
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages], partials: [Partials.Message, Partials.Channel, Partials.Reaction] });
+client.commands = new Collection();
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+// command loader
+try {
+	// command update & exec module
+	for (const file of commandFiles) {
+		const filePath = path.join(commandsPath, file);
+		const command = require(filePath);
+		client.commands.set(command.data.name, command);
+		modulcount = modulcount + 1;
+		message = 'Command #' + modulcount + ': ' + file + ' has been loaded successfully'
+		logger.info(message);
+		const query = `INSERT INTO info ('mensaje') VALUES ('${mensajeError}')`;
+		connection.query(query, function(err, result) {
+			if (err) {
+			  console.error('Error al insertar registro: ' + err.stack);
+			  return;
+			}
+	});
+}}
+// command loader error handler
+catch (error) {
+	logger.error('pls check command update & exec module');
+}
+// client ready block
+client.once(Events.ClientReady, () => {
+	logger.info(modulcount + ' modules has been loaded');
+	try {
+		logger.info('neko module has been loaded!');
+	}
+	catch (error) {logger.error('neko module has not been loaded, error: ', error);}
+	client.user.setStatus('available');
+	client.user.setActivity('Vigilando la legion del ganso :3', { type: 'WATCHING' });
+	client.user.setPresence({
+		activities: [{ name: 'como te va a banear un furro', type: ActivityType.Watching }],
+		status: 'dnd',
+	});
+	try {
+		logger.info('Bot is running on prod. enviroment.');
+	}
+	catch (error) {
+		logger.error('unable to send online message, but bot is alive (still running on localhost). pls check index.js client ready block. error: ', error);
+	}
+	logger.info('yes i fucking am! ProtoDEV V1.0.2mu2 has been loaded with ' + modulcount + ' modules!');
+});
+// command execution
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isChatInputCommand()) return;
+	const command = client.commands.get(interaction.commandName);
+	if (!command) return;
+	try {
+		await command.execute(interaction);
+	}
+	catch (error) {
+		logger.error(error);
+		if (interaction.replied || interaction.deferred) {
+			await interaction.followUp({ content: 'Hubo un error ejecutando este comando!', ephemeral:true });
+		}
+		else {
+			await interaction.reply({ content: 'Hubo un error ejecutando este comando!', ephemeral:true });
+		}
+	}
+});
+// report handling
+client.on(Events.MessageCreate, async message => {
+	if (message.author.id.toString() != '911444198329303070' && message.content.startsWith('!report')) {
+		const dmreq = message.content.slice(8);
+		const reportchannel = REPCHAN_ID;
+		if (!message.inGuild()) {
+			const answremb = {
+				color: '#0000ff',
+				title: 'Hemos recibido tu reporte',
+				description: `Reporte:\n ${dmreq}\n\nPronto un administrador revisara el caso, y de ser necesario se pondrá en contacto contigo`,
+				footer: {
+					text: 'Gracias por confiar en protoSUDO!',
+				},
+			};
+			const chan = client.channels.cache.get(reportchannel);
+			const repEmbed = {
+				color: '#ff0000',
+				title: 'Nuevo reporte',
+				description: `He recibido un mensaje de ${message.author.tag}:\n ${dmreq}`,
+				footer:  'protoSUDO v0.0.4C'
+			}
+			
+			try {
+				chan.send({ content: '<@&559478924090933292> <@&559888553971286027> <@&574479958278406166>', embeds: [repEmbed] });
+			}
+			catch (error) {
+				logger.error('error: ', error);
+			}
+			try {
+				message.author.send({ embeds: [answremb] });
+			}
+			catch (error) {
+				message.author.send('Tu reporte ha sido enviado!');
+				logger.error('no se ha podido generar el embed de respuesta, error: ', error);
+			}
+		}
+	}
+	else {
+		return;
+	}
+});
+// client login confirmation
+client.on('ready', () => {
+	logger.info(`Logged in as ${client.user.tag}!`);
+});
+client.login(token);
