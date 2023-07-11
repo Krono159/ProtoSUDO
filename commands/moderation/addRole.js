@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder,PermissionsBitField,PermissionFlagBits } = require('discord.js');
 const winston = require('winston');
 const logger = winston.createLogger({
 	transports: [
@@ -15,15 +15,27 @@ module.exports = {
 				.setName('target')
 				.setDescription('The member to ban')
 				.setRequired(true))
-		.addRoleOption(option =>
-			option
-				.setName('role')
-				.setDescription('Target user')
-				.setRequired(true)),
+				.addRoleOption(option =>
+					option
+					.setName('role')
+					.setDescription('Target user')
+					.setRequired(true))
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator || PermissionsBitField.Flags.ManageRoles),
 
 	async execute(interaction) {
 		const member = interaction.options.getMember('target');
 		const role = interaction.options.getRole('role');
+		const forbiden = {
+			title: 'error',
+			description: `No tienes permiso para usar este comando!`,
+			image: {
+				url: 'https://http.cat/401',
+			},
+			footer: {
+				text: 'ProtoSUDO',
+			},
+		};
+		if(!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator || PermissionsBitField.Flags.ManageRoles )) return await interaction.reply({ embeds: [forbiden], ephemeral: true })
 		if (member.roles.cache.has(role => role.name === 'role name')) {
 			const answremb = {
 				title: 'error',
@@ -53,9 +65,6 @@ module.exports = {
 				const errorembed = {
 					title: 'error',
 					description: 'error on execution\ncontact devs',
-					image: {
-						url: 'https://http.cat/417',
-					},
 					footer: {
 						text: 'ProtoSUDO',
 					},
