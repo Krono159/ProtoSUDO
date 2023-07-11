@@ -30,7 +30,7 @@ module.exports = {
 				description: `${member} already have the role ${role}`,
 
 				footer: {
-					text: 'Danko on dev stage',
+					text: 'ProtoSUDO',
 				},
 			};
 			interaction.reply({ embeds: [answremb], ephemeral: true });
@@ -43,7 +43,7 @@ module.exports = {
 					description: `added role ${role} to ${member}`,
 
 					footer: {
-						text: 'Danko on dev stage',
+						text: 'ProtoSUDO',
 					},
 				};
 				interaction.reply({ embeds: [answremb] });
@@ -57,7 +57,7 @@ module.exports = {
 						url: 'https://http.cat/417',
 					},
 					footer: {
-						text: 'Danko on dev stage',
+						text: 'ProtoSUDO',
 					},
 				};
 				await interaction.reply({ embeds: [errorembed], ephemeral:false });
