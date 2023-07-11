@@ -5,4 +5,8 @@ data
 tkn.json
 desktop.ini
 database/
+<<<<<<< HEAD
 notes.txt
+=======
+Notes.txt
+>>>>>>> main

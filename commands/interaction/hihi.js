@@ -8,11 +8,11 @@ module.exports = {
 		.setDescription('Saluda a todos!'),
 	async execute(interaction) {
 		try {
-			let user = interaction.user.username;
-			let nekoanswer = await ((await nekoClient.fetch('smile', 1)).results[0]);
-			let nekourl = nekoanswer.url;
-			let nekotitle = nekoanswer.anime_name
-			let logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**' + user + '** saluda a todos!').setImage(nekourl).setFooter({text: 'anime: '+ nekotitle+ ' | K159|MoccaDev'});
+			const user = interaction.user.username;
+			const nekoanswer = await ((await nekoClient.fetch('wave', 1)).results[0]);
+			const nekourl = nekoanswer.url;
+			const nekotitle = nekoanswer.anime_name;
+			const logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**' + user + '** saluda a todos!').setImage(nekourl).setFooter({ text: 'anime: ' + nekotitle + ' | K159|MoccaDev' });
 			await interaction.reply({ embeds: [logEmbed] });
 
 		}
@@ -24,5 +24,3 @@ module.exports = {
 	},
 
 };
-
- 

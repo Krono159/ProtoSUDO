@@ -9,10 +9,10 @@ module.exports = {
 	async execute(interaction) {
 		try {
 			const user = interaction.user.username;
-			let nekoanswer = await ((await nekoClient.fetch('neko', 1)).results[0]);
-			let nekourl = nekoanswer.url;
-			let nekoname = nekoanswer.artist_name;
-			const logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**'+user+'** invocó una neko-girl!').setImage(nekourl).setFooter({text: 'artista: '+ nekoname+ ' | K159|MoccaDev'});
+			const nekoanswer = await ((await nekoClient.fetch('neko', 1)).results[0]);
+			const nekourl = nekoanswer.url;
+			const nekoname = nekoanswer.artist_name;
+			const logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**' + user + '** invocó una neko-girl!').setImage(nekourl).setFooter({ text: 'artista: ' + nekoname + ' | K159|MoccaDev' });
 			// console.log(nekoanswer)
 			await interaction.reply({ embeds: [logEmbed] });
 			console.log('Nekotest completed!');
