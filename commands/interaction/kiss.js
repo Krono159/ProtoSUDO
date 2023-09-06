@@ -1,9 +1,13 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { Client: NbClient } = require('nekos-best.js');
 const admin = '610937299903184898';
+const winston = require('winston');
 const nekoClient = new NbClient();
 const color = '#ffabcd';
 let counter = 0;
+const logger = winston.createLogger({
+	transports: [new winston.transports.Console()],
+});
 
 module.exports = {
 
@@ -24,25 +28,27 @@ module.exports = {
 				const nekoanswer = await ((await nekoClient.fetch('punch', 1)).results[0]);
 				const nekoUrl = nekoanswer.url;
 				const nekoName = nekoanswer.anime_name;
-				const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** intentó besar a **${tgt.username}** pero falló!`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName + ' | K159|MoccaDev' });
+				const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** intentó besar a **${tgt.username}** pero falló!`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
+				console.log('intentaron besar a krono? pendejos')
 				await interaction.reply({ embeds: [logEmbed] });
 			}
 			else if (tgt.id !== interaction.user.id) {
 				const nekoanswer = await ((await nekoClient.fetch('kiss', 1)).results[0]);
 				const nekoUrl = nekoanswer.url;
 				const nekoName = nekoanswer.anime_name;
-				const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** besó a **${tgt.username}** !`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName + ' | K159|MoccaDev' });
+				const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** besó a **${tgt.username}** !`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 				await interaction.reply({ embeds: [logEmbed] });
 			}
 			else {
 				const nekoanswer = await ((await nekoClient.fetch('kiss', 1)).results[0]);
 				const nekoUrl = nekoanswer.url;
 				const nekoName = nekoanswer.anime_name;
-				const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** se besó a si mism@! como es eso posible?`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName + ' | K159|MoccaDev' });
+				const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** se besó a si mism@! como es eso posible?`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 				await interaction.reply({ embeds: [logEmbed] });
 			}
 			counter += 1;
-			console.log('kiss command has been used ' + counter + ' times since last reboot');
+			logger.info( 'kiss command has been used ' + counter + ' times since last reboot');
+			logger.info('image: ',nekoUrl,' name: ',nekoName)
 
 		}
 		catch (error) {

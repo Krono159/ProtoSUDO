@@ -1,5 +1,6 @@
-const { SlashCommandBuilder,PermissionsBitField,PermissionFlagBits } = require('discord.js');
+const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
 const winston = require('winston');
+const chalk = require('chalk');
 const logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console(),
@@ -15,11 +16,11 @@ module.exports = {
 				.setName('target')
 				.setDescription('The member to ban')
 				.setRequired(true))
-				.addRoleOption(option =>
-					option
-					.setName('role')
-					.setDescription('Target user')
-					.setRequired(true))
+		.addRoleOption(option =>
+			option
+				.setName('role')
+				.setDescription('Target user')
+				.setRequired(true))
 		.setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator || PermissionsBitField.Flags.ManageRoles),
 
 	async execute(interaction) {
@@ -27,7 +28,7 @@ module.exports = {
 		const role = interaction.options.getRole('role');
 		const forbiden = {
 			title: 'error',
-			description: `No tienes permiso para usar este comando!`,
+			description: 'No tienes permiso para usar este comando!',
 			image: {
 				url: 'https://http.cat/401',
 			},
@@ -35,7 +36,10 @@ module.exports = {
 				text: 'ProtoSUDO',
 			},
 		};
-		if(!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator || PermissionsBitField.Flags.ManageRoles )) return await interaction.reply({ embeds: [forbiden], ephemeral: true })
+		try {
+			
+		
+		if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator || PermissionsBitField.Flags.ManageRoles)) return await interaction.reply({ embeds: [forbiden], ephemeral: true });
 		if (member.roles.cache.has(role => role.name === 'role name')) {
 			const answremb = {
 				title: 'error',
@@ -58,6 +62,7 @@ module.exports = {
 						text: 'ProtoSUDO',
 					},
 				};
+				console.log(chalk.green(`added role ${role.name} to ${member.user.username}`))
 				interaction.reply({ embeds: [answremb] });
 			}
 			catch (error) {
@@ -72,5 +77,16 @@ module.exports = {
 				await interaction.reply({ embeds: [errorembed], ephemeral:false });
 			}
 		}
+	} catch (error) {
+		logger.error('error adding role, error: ', error);
+		const errorembed = {
+			title: 'error',
+			description: 'error on execution\ncontact devs',
+			footer: {
+				text: 'ProtoSUDO',
+			},
+		};
+		await interaction.reply({ embeds: [errorembed], ephemeral:false });
+	}
 	},
 };

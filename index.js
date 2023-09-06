@@ -6,6 +6,7 @@ const { Client, Collection, Events, GatewayIntentBits} = require ('discord.js');
 const neko = require('nekos-best.js');
 const { REPCHAN_ID,} = require('./config.json');
 // initial message
+const chalk = require('chalk');
 const {token} = require('./tkn.json')
 const winston = require('winston');
 const logger = winston.createLogger({
@@ -13,11 +14,11 @@ const logger = winston.createLogger({
 		new winston.transports.Console(),
 	],
 });
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
-client.commands = new Collection();
-const foldersPath = path.join(__dirname, 'commands');
-const commandFolders = fs.readdirSync(foldersPath);
+	const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+	
+	client.commands = new Collection();
+	const foldersPath = path.join(__dirname, 'commands');
+	const commandFolders = fs.readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
 	const commandsPath = path.join(foldersPath, folder);
@@ -35,7 +36,7 @@ for (const folder of commandFolders) {
 }
 
 client.once(Events.ClientReady, () => {
-	logger.info(`Ready! logged in as ${client.user.tag}`);
+	console.log(chalk.blue((`Ready! logged in as ${client.user.tag}`)));
 });
 
 client.on(Events.InteractionCreate, async interaction => {

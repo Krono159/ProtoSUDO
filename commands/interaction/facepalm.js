@@ -3,6 +3,10 @@ const { Client: NbClient } = require('nekos-best.js');
 const nekoClient = new NbClient();
 const color = '#000000';
 let facecounter = 0;
+const winston = require('winston');
+const logger = winston.createLogger({
+	transports: [new winston.transports.Console()],
+});
 module.exports = {
 
 	data: new SlashCommandBuilder()
@@ -13,9 +17,10 @@ module.exports = {
 			const nekoanswer = await ((await nekoClient.fetch('facepalm', 1)).results[0]);
 			const nekoUrl = nekoanswer.url;
 			const nekoName = nekoanswer.anime_name;
-			const logEmbed = new EmbedBuilder().setColor(color).setTitle('...').setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName + ' | K159|MoccaDev' });
+			const logEmbed = new EmbedBuilder().setColor(color).setTitle('...').setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName  });
 			facecounter += 1;
-			console.log('facepalm command has been used ' + facecounter + ' times since last reboot');
+			logger.info( 'facepalm command has been used ' + facecounter + ' times since last reboot');
+			logger.info('image: ' + nekoUrl + ' name: ' + nekoName)
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

@@ -3,6 +3,9 @@ const { clientId, guildId } = require('./config.json');
 const {token} = require('./tkn.json')
 const fs = require('node:fs');
 const path = require('node:path');
+const winston = require('winston');
+const chalk = require('chalk');
+
 
 const commands = [];
 // Grab all the command files from the commands directory you created earlier
@@ -25,25 +28,28 @@ for (const folder of commandFolders) {
 		}
 	}
 }
-
 // Construct and prepare an instance of the REST module
 const rest = new REST().setToken(token);
 
 // and deploy your commands!
 (async () => {
 	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
+		console.log(chalk.blue(`Started refreshing ${commands.length} application (/) commands.`));
 
 		// The put method is used to fully refresh all commands in the guild with the current set
-		const data = await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
-			{ body: commands },
-		);
+		try {
+			const data = await rest.put(
+				Routes.applicationGuildCommands(clientId, guildId),
+				{ body: commands },
+			);			
+			console.log(chalk.green(`Successfully reloaded ${data.length} application (/) commands.`));
+		} catch (error) {
+			console.log(chalk.red(`cant reload ${data.length} applications on the bot. error: ${error}.`));
+		}
 
-		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	}
 	catch (error) {
 		// And of course, make sure you catch and log any errors!
-		console.error(error);
+		console.error(chalk.red(error));
 	}
 })();
