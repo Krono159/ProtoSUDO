@@ -26,8 +26,8 @@ module.exports = {
 			const nekoName = nekoanswer.anime_name;
 			const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** acaricia la cabeza de ${tgt}~`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			cudcounter += 1;
-			logger.info( 'pat command has been used ' + cudcounter + ' times since last reboot');
-			logger.info('image: ',nekoUrl,' name: ',nekoName)
+			logger.info('pat command has been used ' + cudcounter + ' times since last reboot');
+			logger.info('image: ', nekoUrl, ' name: ', nekoName);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

@@ -1,24 +1,24 @@
 // Require the necessary discord.js classes, possibly this would be required in the future: /* AuditLogEvent*/  at const on line 2
 const fs = require('fs');
 const path = require('path');
-const { Client, Collection, Events, GatewayIntentBits} = require ('discord.js');
-//const winexpress = require('express-winston');
+const { Client, Collection, Events, GatewayIntentBits } = require ('discord.js');
+// const winexpress = require('express-winston');
 const neko = require('nekos-best.js');
-const { REPCHAN_ID,} = require('./config.json');
+const { REPCHAN_ID } = require('./config.json');
 // initial message
 const chalk = require('chalk');
-const {token} = require('./tkn.json')
+const { token } = require('./tkn.json');
 const winston = require('winston');
 const logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console(),
 	],
 });
-	const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-	
-	client.commands = new Collection();
-	const foldersPath = path.join(__dirname, 'commands');
-	const commandFolders = fs.readdirSync(foldersPath);
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+client.commands = new Collection();
+const foldersPath = path.join(__dirname, 'commands');
+const commandFolders = fs.readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
 	const commandsPath = path.join(foldersPath, folder);
@@ -96,9 +96,9 @@ client.on(Events.MessageCreate, async message => {
 				color: '#ff0000',
 				title: 'Nuevo reporte',
 				description: `He recibido un mensaje de ${message.author.tag}:\n ${dmreq}`,
-				footer:  'protoSUDO v0.0.4C'
-			}
-			
+				footer:  'protoSUDO v0.0.4C',
+			};
+
 			try {
 				chan.send({ content: '<@&559478924090933292> <@&559888553971286027> <@&574479958278406166>', embeds: [repEmbed] });
 			}

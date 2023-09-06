@@ -26,8 +26,8 @@ module.exports = {
 			const nekoName = nekoanswer.anime_name;
 			const logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(`**${guilty}** abrazó a ${tgt}`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			hugcounter += 1;
-			logger.info( 'hug command has been used ' + hugcounter + ' times since last reboot');
-			logger.info('image: ',nekoUrl,' name: ',nekoName)
+			logger.info('hug command has been used ' + hugcounter + ' times since last reboot');
+			logger.info('image: ', nekoUrl, ' name: ', nekoName);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

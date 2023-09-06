@@ -18,10 +18,10 @@ module.exports = {
 			const nekoanswer = await ((await nekoClient.fetch('bored', 1)).results[0]);
 			const nekoUrl = nekoanswer.url;
 			const nekoName = nekoanswer.anime_name;
-			const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** está aburrido...`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName});
+			const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** está aburrido...`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			borcounter += 1;
-			logger.info( 'blush command has been used ' + borcounter + ' times since last reboot');
-			logger.info('image: '+ nekoUrl + ' name: ' + nekoName)
+			logger.info('blush command has been used ' + borcounter + ' times since last reboot');
+			logger.info('image: ' + nekoUrl + ' name: ' + nekoName);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

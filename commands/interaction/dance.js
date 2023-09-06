@@ -20,8 +20,8 @@ module.exports = {
 			const nekoName = nekoanswer.anime_name;
 			const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** sacó los pasos prohibidos!`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			counter += 1;
-			logger.info( 'dance command has been used ' + counter + ' times since last reboot');
-			logger.info('image: ' + nekoUrl + ' name: ' + nekoName)
+			logger.info('dance command has been used ' + counter + ' times since last reboot');
+			logger.info('image: ' + nekoUrl + ' name: ' + nekoName);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

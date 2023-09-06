@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { Client: NbClient } = require('nekos-best.js');
 const nekoClient = new NbClient();
-let counter = 0
+let counter = 0;
 const winston = require('winston');
 const logger = winston.createLogger({
 	transports: [new winston.transports.Console()],
@@ -16,11 +16,11 @@ module.exports = {
 			const nekoanswer = await ((await nekoClient.fetch('neko', 1)).results[0]);
 			const nekourl = nekoanswer.url;
 			const nekoname = nekoanswer.artist_name;
-			const logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**' + user + '** invocó una neko-girl!').setImage(nekourl).setFooter({ text: 'artista: ' + nekoname});
+			const logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**' + user + '** invocó una neko-girl!').setImage(nekourl).setFooter({ text: 'artista: ' + nekoname });
 			// console.log(nekoanswer)
-			counter += 1
-			logger.info( 'neko command has been used ' + counter + ' times since last reboot');
-			logger.info('image: ' + nekourl + ' name: ' + nekoname)
+			counter += 1;
+			logger.info('neko command has been used ' + counter + ' times since last reboot');
+			logger.info('image: ' + nekourl + ' name: ' + nekoname);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

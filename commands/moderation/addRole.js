@@ -37,56 +37,57 @@ module.exports = {
 			},
 		};
 		try {
-			
-		
-		if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator || PermissionsBitField.Flags.ManageRoles)) return await interaction.reply({ embeds: [forbiden], ephemeral: true });
-		if (member.roles.cache.has(role => role.name === 'role name')) {
-			const answremb = {
-				title: 'error',
-				description: `${member} already have the role ${role}`,
 
+
+			if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator || PermissionsBitField.Flags.ManageRoles)) return await interaction.reply({ embeds: [forbiden], ephemeral: true });
+			if (member.roles.cache.has(role => role.name === 'role name')) {
+				const answremb = {
+					title: 'error',
+					description: `${member} already have the role ${role}`,
+
+					footer: {
+						text: 'ProtoSUDO',
+					},
+				};
+				interaction.reply({ embeds: [answremb], ephemeral: true });
+			}
+			else {
+				try {
+					member.roles.add(role);
+					const answremb = {
+						title: 'Role added',
+						description: `added role ${role} to ${member}`,
+
+						footer: {
+							text: 'ProtoSUDO',
+						},
+					};
+					console.log(chalk.green(`added role ${role.name} to ${member.user.username}`));
+					interaction.reply({ embeds: [answremb] });
+				}
+				catch (error) {
+					logger.error('error adding role, error: ', error);
+					const errorembed = {
+						title: 'error',
+						description: 'error on execution\ncontact devs',
+						footer: {
+							text: 'ProtoSUDO',
+						},
+					};
+					await interaction.reply({ embeds: [errorembed], ephemeral:false });
+				}
+			}
+		}
+		catch (error) {
+			logger.error('error adding role, error: ', error);
+			const errorembed = {
+				title: 'error',
+				description: 'error on execution\ncontact devs',
 				footer: {
 					text: 'ProtoSUDO',
 				},
 			};
-			interaction.reply({ embeds: [answremb], ephemeral: true });
+			await interaction.reply({ embeds: [errorembed], ephemeral:false });
 		}
-		else {
-			try {
-				member.roles.add(role);
-				const answremb = {
-					title: 'Role added',
-					description: `added role ${role} to ${member}`,
-
-					footer: {
-						text: 'ProtoSUDO',
-					},
-				};
-				console.log(chalk.green(`added role ${role.name} to ${member.user.username}`))
-				interaction.reply({ embeds: [answremb] });
-			}
-			catch (error) {
-				logger.error('error adding role, error: ', error);
-				const errorembed = {
-					title: 'error',
-					description: 'error on execution\ncontact devs',
-					footer: {
-						text: 'ProtoSUDO',
-					},
-				};
-				await interaction.reply({ embeds: [errorembed], ephemeral:false });
-			}
-		}
-	} catch (error) {
-		logger.error('error adding role, error: ', error);
-		const errorembed = {
-			title: 'error',
-			description: 'error on execution\ncontact devs',
-			footer: {
-				text: 'ProtoSUDO',
-			},
-		};
-		await interaction.reply({ embeds: [errorembed], ephemeral:false });
-	}
 	},
 };

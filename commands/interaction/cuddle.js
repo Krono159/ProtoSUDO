@@ -24,10 +24,10 @@ module.exports = {
 			const nekoanswer = await ((await nekoClient.fetch('cuddle', 1)).results[0]);
 			const nekoUrl = nekoanswer.url;
 			const nekoName = nekoanswer.anime_name;
-			const logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(` **${guilty}** se acurruca con ${tgt}~`).setImage(nekoUrl).setFooter({ text: 'anime: '+nekoName});
+			const logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(` **${guilty}** se acurruca con ${tgt}~`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			cudcounter += 1;
-			logger.info( 'cuddle command has been used ' + cudcounter + ' times since last reboot');
-			logger.info('image: ' + nekoUrl + ' name: ' + nekoName)
+			logger.info('cuddle command has been used ' + cudcounter + ' times since last reboot');
+			logger.info('image: ' + nekoUrl + ' name: ' + nekoName);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

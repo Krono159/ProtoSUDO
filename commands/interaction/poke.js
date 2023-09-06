@@ -24,10 +24,10 @@ module.exports = {
 			const nekoanswer = await ((await nekoClient.fetch('poke', 1)).results[0]);
 			const nekoUrl = nekoanswer.url;
 			const nekoName = nekoanswer.anime_name;
-			const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** quiere llamar la atención de ${tgt}  `).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName});
+			const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** quiere llamar la atención de ${tgt}  `).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			counter += 1;
-			logger.info( 'poke command has been used ' + counter + ' times since last reboot');
-			logger.info('image: ',nekoUrl,' name: ',nekoName)
+			logger.info('poke command has been used ' + counter + ' times since last reboot');
+			logger.info('image: ', nekoUrl, ' name: ', nekoName);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

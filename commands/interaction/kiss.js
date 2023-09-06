@@ -29,7 +29,7 @@ module.exports = {
 				const nekoUrl = nekoanswer.url;
 				const nekoName = nekoanswer.anime_name;
 				const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** intentó besar a **${tgt.username}** pero falló!`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
-				console.log('intentaron besar a krono? pendejos')
+				console.log('intentaron besar a krono? pendejos');
 				await interaction.reply({ embeds: [logEmbed] });
 			}
 			else if (tgt.id !== interaction.user.id) {
@@ -41,14 +41,14 @@ module.exports = {
 			}
 			else {
 				const nekoanswer = await ((await nekoClient.fetch('kiss', 1)).results[0]);
-				const nekoUrl = nekoanswer.url;
-				const nekoName = nekoanswer.anime_name;
+				let nekoUrl = nekoanswer.url;
+				let nekoName = nekoanswer.anime_name;
 				const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** se besó a si mism@! como es eso posible?`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 				await interaction.reply({ embeds: [logEmbed] });
 			}
 			counter += 1;
-			logger.info( 'kiss command has been used ' + counter + ' times since last reboot');
-			logger.info('image: ',nekoUrl,' name: ',nekoName)
+			logger.info('kiss command has been used ' + counter + ' times since last reboot');
+			logger.info('image: ', nekoUrl, ' name: ', nekoName);
 
 		}
 		catch (error) {

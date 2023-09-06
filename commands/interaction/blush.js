@@ -25,8 +25,8 @@ module.exports = {
 			const nekoName = nekoanswer.anime_name;
 			const logEmbed = new EmbedBuilder().setColor('#0000ff').setDescription(`${tgt} hizo sonrojar a **${guilty}**!`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			counter += 1;
-			logger.info( 'blush command has been used ' + counter + ' times since last reboot');
-			logger.info('image: '+ nekoUrl + ' name: ' + nekoName)
+			logger.info('blush command has been used ' + counter + ' times since last reboot');
+			logger.info('image: ' + nekoUrl + ' name: ' + nekoName);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

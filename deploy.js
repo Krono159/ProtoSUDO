@@ -1,9 +1,8 @@
 const { REST, Routes } = require('discord.js');
 const { clientId, guildId } = require('./config.json');
-const {token} = require('./tkn.json')
+const { token } = require('./tkn.json');
 const fs = require('node:fs');
 const path = require('node:path');
-const winston = require('winston');
 const chalk = require('chalk');
 
 
@@ -41,9 +40,10 @@ const rest = new REST().setToken(token);
 			const data = await rest.put(
 				Routes.applicationGuildCommands(clientId, guildId),
 				{ body: commands },
-			);			
+			);
 			console.log(chalk.green(`Successfully reloaded ${data.length} application (/) commands.`));
-		} catch (error) {
+		}
+		catch (error) {
 			console.log(chalk.red(`cant reload ${data.length} applications on the bot. error: ${error}.`));
 		}
 

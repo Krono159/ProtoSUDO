@@ -17,10 +17,10 @@ module.exports = {
 			const nekoanswer = await ((await nekoClient.fetch('facepalm', 1)).results[0]);
 			const nekoUrl = nekoanswer.url;
 			const nekoName = nekoanswer.anime_name;
-			const logEmbed = new EmbedBuilder().setColor(color).setTitle('...').setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName  });
+			const logEmbed = new EmbedBuilder().setColor(color).setTitle('...').setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			facecounter += 1;
-			logger.info( 'facepalm command has been used ' + facecounter + ' times since last reboot');
-			logger.info('image: ' + nekoUrl + ' name: ' + nekoName)
+			logger.info('facepalm command has been used ' + facecounter + ' times since last reboot');
+			logger.info('image: ' + nekoUrl + ' name: ' + nekoName);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {
