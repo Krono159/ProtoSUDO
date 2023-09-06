@@ -4,6 +4,7 @@ const { token } = require('./tkn.json');
 const fs = require('node:fs');
 const path = require('node:path');
 const chalk = require('chalk');
+const { exitCode, exit } = require('node:process');
 
 
 const commands = [];
@@ -33,23 +34,26 @@ const rest = new REST().setToken(token);
 // and deploy your commands!
 (async () => {
 	try {
-		console.log(chalk.blue(`Started refreshing ${commands.length} application (/) commands.`));
-
-		// The put method is used to fully refresh all commands in the guild with the current set
-		try {
-			const data = await rest.put(
-				Routes.applicationGuildCommands(clientId, guildId),
-				{ body: commands },
-			);
-			console.log(chalk.green(`Successfully reloaded ${data.length} application (/) commands.`));
+		console.log(chalk.red('removing commands from global scope if any'))
+		rest.put(Routes.applicationCommands(clientId), { body: [] });
+		console.log(chalk.red('commands removed'))
+			try {
+				const data = rest.put(
+					Routes.applicationCommands(clientId),
+					{ body: commands },
+				);
+				console.log(chalk.green(`Successfully reloaded ${data.length} application (/) commands.`));
+			}catch(error){
+				console.log(chalk.red(`cant reload ${data.length} applications on the bot. error: ${error}.`));
+			}
+		} catch (error) {
+			try {
+				console.log(chalk.red(`ERROR: CANT PUSH COMMANDS: ${error}`))
+			} catch (error) {				
+				console.log('no commands to remove or unknown error removing commands, logging error')
+			}
 		}
-		catch (error) {
-			console.log(chalk.red(`cant reload ${data.length} applications on the bot. error: ${error}.`));
-		}
 
-	}
-	catch (error) {
-		// And of course, make sure you catch and log any errors!
-		console.error(chalk.red(error));
-	}
+
 })();
+//this is the deploy.js file
