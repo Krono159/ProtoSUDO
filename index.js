@@ -1,12 +1,13 @@
 // Require the necessary discord.js classes, possibly this would be required in the future: /* AuditLogEvent*/  at const on line 2
 const fs = require('fs');
 const path = require('path');
-const { Client, Collection, Events, GatewayIntentBits} = require ('discord.js');
-//const winexpress = require('express-winston');
+const { Client, Collection, Events, GatewayIntentBits } = require ('discord.js');
+// const winexpress = require('express-winston');
 const neko = require('nekos-best.js');
-const { REPCHAN_ID,} = require('./config.json');
+const { REPCHAN_ID } = require('./config.json');
 // initial message
-const {token} = require('./tkn.json')
+const chalk = require('chalk');
+const { token } = require('./tkn.json');
 const winston = require('winston');
 const logger = winston.createLogger({
 	transports: [
@@ -35,7 +36,7 @@ for (const folder of commandFolders) {
 }
 
 client.once(Events.ClientReady, () => {
-	logger.info(`Ready! logged in as ${client.user.tag}`);
+	console.log(chalk.blue((`Ready! logged in as ${client.user.tag}`)));
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -95,9 +96,9 @@ client.on(Events.MessageCreate, async message => {
 				color: '#ff0000',
 				title: 'Nuevo reporte',
 				description: `He recibido un mensaje de ${message.author.tag}:\n ${dmreq}`,
-				footer:  'protoSUDO v0.0.4C'
-			}
-			
+				footer:  'protoSUDO v0.0.4C',
+			};
+
 			try {
 				chan.send({ content: '<@&559478924090933292> <@&559888553971286027> <@&574479958278406166>', embeds: [repEmbed] });
 			}

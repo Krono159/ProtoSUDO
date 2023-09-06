@@ -1,7 +1,11 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { Client: NbClient } = require('nekos-best.js');
 const nekoClient = new NbClient();
-const counter = 0;
+let counter = 0;
+const winston = require('winston');
+const logger = winston.createLogger({
+	transports: [new winston.transports.Console()],
+});
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('cry')
@@ -13,10 +17,12 @@ module.exports = {
 			const nekoUrl = nekoAnswer.url;
 			const nekoName = nekoAnswer.anime_name;
 			// console.log(nekoAnswer)
-			const logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**' + user + '** está llorando :c').setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName + ' | K159|MoccaDev' });
+			const logEmbed = new EmbedBuilder().setColor('#ff55AA').setDescription('**' + user + '** está llorando :c').setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 
 			await interaction.reply({ embeds: [logEmbed] });
-			console.log('cry successful. people have cried', counter, ' times');
+			counter += 1;
+			logger.info('cry command has been used ' + counter + ' times since last reboot');
+			logger.info('image: ', nekoUrl, ' name: ', nekoName);
 
 		}
 		catch (error) {

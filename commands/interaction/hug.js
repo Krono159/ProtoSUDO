@@ -2,7 +2,11 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { Client: NbClient } = require('nekos-best.js');
 const nekoClient = new NbClient();
 const color = '#ffabcd';
+const winston = require('winston');
 let hugcounter = 0;
+const logger = winston.createLogger({
+	transports: [new winston.transports.Console()],
+});
 module.exports = {
 
 	data: new SlashCommandBuilder()
@@ -20,9 +24,10 @@ module.exports = {
 			const nekoanswer = await ((await nekoClient.fetch('hug', 1)).results[0]);
 			const nekoUrl = nekoanswer.url;
 			const nekoName = nekoanswer.anime_name;
-			const logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(`**${guilty}** abrazó a ${tgt}`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName + ' | K159|MoccaDev' });
+			const logEmbed = new EmbedBuilder().setColor(color).setTitle('aww').setDescription(`**${guilty}** abrazó a ${tgt}`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			hugcounter += 1;
-			console.log('hug command has been used ' + hugcounter + ' times since last reboot');
+			logger.info('hug command has been used ' + hugcounter + ' times since last reboot');
+			logger.info('image: ', nekoUrl, ' name: ', nekoName);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

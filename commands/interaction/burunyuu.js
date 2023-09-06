@@ -68,7 +68,7 @@ module.exports = {
 			console.log('default');
 			break;
 		}
-		const logEmbed = new EmbedBuilder().setColor(color).setTitle(title).setImage(image).setFooter({ text: 'K159 | MoccaDev' });
+		const logEmbed = new EmbedBuilder().setColor(color).setTitle(title).setImage(image);
 		await interaction.reply({ embeds: [logEmbed] });
 
 	},

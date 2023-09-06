@@ -1,8 +1,12 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { Client: NbClient } = require('nekos-best.js');
 const nekoClient = new NbClient();
+const winston = require('winston');
 const color = '#ffabcd';
 let counter = 0;
+const logger = winston.createLogger({
+	transports: [new winston.transports.Console()],
+});
 module.exports = {
 
 	data: new SlashCommandBuilder()
@@ -20,9 +24,10 @@ module.exports = {
 			const nekoanswer = await ((await nekoClient.fetch('shoot', 1)).results[0]);
 			const nekoUrl = nekoanswer.url;
 			const nekoName = nekoanswer.anime_name;
-			const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** le disparó a ${tgt}!`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName + ' | K159|MoccaDev' });
+			const logEmbed = new EmbedBuilder().setColor(color).setDescription(`**${guilty}** le disparó a ${tgt}!`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			counter += 1;
-			console.log('kill command has been used ' + counter + ' times since last reboot');
+			logger.info('kill command has been used ' + counter + ' times since last reboot');
+			logger.info('image: ' + nekoUrl + ' name: ' + nekoName);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {

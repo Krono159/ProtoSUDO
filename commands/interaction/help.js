@@ -19,6 +19,7 @@ module.exports = {
 			.setColor('LuminousVividPink')
 			.setTitle('ProtoHelp Center - Entretenimiento')
 			.setDescription('help command guide: ')
+			.addFields({ name: '/aburrido', value:'estas aburrido? yo tambien... hazlo saber a todos' })
 			.addFields({ name: '/ban', value:'Banea a un usuario (ahora disponible para todos)' })
 			.addFields({ name: '/blush', value:'Muestra un gif indicando que alguien te hizo sonrojar' })
 			.addFields({ name: '/burunyuu', value:'Muestra un gif random de neco arc' })
