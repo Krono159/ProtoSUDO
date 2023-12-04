@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const { Client, Collection, Events, GatewayIntentBits } = require ('discord.js');
 // const winexpress = require('express-winston');
-const neko = require('nekos-best.js');
 const { REPCHAN_ID } = require('./config.json');
 // initial message
 const chalk = require('chalk');

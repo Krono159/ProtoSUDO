@@ -34,26 +34,29 @@ const rest = new REST().setToken(token);
 // and deploy your commands!
 (async () => {
 	try {
-		console.log(chalk.red('removing commands from global scope if any'))
+		console.log(chalk.red('removing commands from global scope if any'));
 		rest.put(Routes.applicationCommands(clientId), { body: [] });
-		console.log(chalk.red('commands removed'))
-			try {
-				const data = rest.put(
-					Routes.applicationCommands(clientId),
-					{ body: commands },
-				);
-				console.log(chalk.green(`Successfully reloaded ${data.length} application (/) commands.`));
-			}catch(error){
-				console.log(chalk.red(`cant reload ${data.length} applications on the bot. error: ${error}.`));
-			}
-		} catch (error) {
-			try {
-				console.log(chalk.red(`ERROR: CANT PUSH COMMANDS: ${error}`))
-			} catch (error) {				
-				console.log('no commands to remove or unknown error removing commands, logging error')
-			}
+		console.log(chalk.red('commands removed'));
+		try {
+			const data = rest.put(
+				Routes.applicationCommands(clientId),
+				{ body: commands },
+			);
+			console.log(chalk.green(`Successfully reloaded ${data.length} application (/) commands.`));
 		}
+		catch (error) {
+			console.log(chalk.red(`cant reload ${data.length} applications on the bot. error: ${error}.`));
+		}
+	}
+	catch (error) {
+		try {
+			console.log(chalk.red(`ERROR: CANT PUSH COMMANDS: ${error}`));
+		}
+		catch (error) {
+			console.log('no commands to remove or unknown error removing commands, logging error');
+		}
+	}
 
 
 })();
-//this is the deploy.js file
+// this is the deploy.js file
