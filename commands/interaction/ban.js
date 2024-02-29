@@ -16,6 +16,6 @@ module.exports = {
 				.setDescription('The reason for banning')),
 
 	async execute(interaction) {
-		await interaction.reply('https://http.cat/403');
+		await interaction.reply('https://http.cat/403.png');
 	},
 };
