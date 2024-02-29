@@ -55,7 +55,7 @@ client.on(Events.InteractionCreate, async interaction => {
 					url: 'https://http.cat/417',
 				},
 				footer: {
-					text: 'proto on dev stage',
+					text: 'proto on dev stage. version 1.2.0.2',
 				},
 			};
 			await interaction.reply({ embeds: [errorembed], ephemeral:false });
@@ -69,7 +69,7 @@ client.on(Events.InteractionCreate, async interaction => {
 					url: 'https://http.cat/417',
 				},
 				footer: {
-					text: 'proto on dev stage',
+					text: 'proto on dev stage. version 1.2.0.2',
 				},
 			};
 			await interaction.reply({ embeds: [errorembed], ephemeral:false });
@@ -95,7 +95,7 @@ client.on(Events.MessageCreate, async message => {
 				color: '#ff0000',
 				title: 'Nuevo reporte',
 				description: `He recibido un mensaje de ${message.author.tag}:\n ${dmreq}`,
-				footer:  'protoSUDO v0.0.4C',
+				footer:  'protoSUDO v1.2.0.2',
 			};
 
 			try {
