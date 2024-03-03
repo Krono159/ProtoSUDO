@@ -2,17 +2,21 @@
 const fs = require('fs');
 const path = require('path');
 const { Client, Collection, Events, GatewayIntentBits } = require ('discord.js');
+const stdin = process.openStdin();
 // const winexpress = require('express-winston');
 const { REPCHAN_ID } = require('./config.json');
 // initial message
 const chalk = require('chalk');
 const { token } = require('./tkn.json');
+const { pwd } = require('./config.json');
 const winston = require('winston');
+let killstatus = 0;
 const logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console(),
 	],
 });
+console.log('to run the bot, please execute "login" on console');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
@@ -33,6 +37,42 @@ for (const folder of commandFolders) {
 		}
 	}
 }
+
+stdin.addListener('data', function(kswtch) {
+	// note:  d is an object, and when converted to a string it will
+	// end with a linefeed.  so we (rather crudely) account for that
+	// with toString() and then trim()
+	// fragment taken from https://stackoverflow.com/questions/8128578/reading-value-from-console-interactively and https://stackoverflow.com/questions/71485230/how-do-i-logout-my-discordbot-in-js-savely-with-a-command
+	// modified to function with Hades
+	if (kswtch.toString().trim() != 'killon' && kswtch.toString().trim() != 'killoff') {
+		console.log('command entered: [' + kswtch.toString().trim() + '] is incorrect. Commands from console: enable killswitch: \'killon\', disable killswitch: \'killoff\'');
+	}
+	if (kswtch.toString().trim() == 'killon' && killstatus == 0) {
+		console.log('byebye, killswitch activated');
+		try {
+			client.destroy();
+			console.log('killswitch activated successfully, to enable bot again, use command "killoff"');
+			killstatus = 1;
+		}
+		catch (error) {
+			console.log('killswitch failed, doing hard kill.');
+			client.logout();
+		}
+	}
+	if (kswtch.toString().trim() == 'killoff ' + pwd & killstatus == 1) {
+		try {
+			console.log('killswitch desactivado, reactivando bot');
+			client.login(token);
+			console.log('bot enabled again');
+			killstatus = 0;
+		}
+		catch (error) {
+			console.log('fallo en activacion, matando proceso para forzar reinicio en host,\n error:' + error);
+			client.logout();
+		}
+	}
+
+});
 
 client.once(Events.ClientReady, () => {
 	console.log(chalk.blue((`Ready! logged in as ${client.user.tag}`)));
@@ -55,7 +95,7 @@ client.on(Events.InteractionCreate, async interaction => {
 					url: 'https://http.cat/417',
 				},
 				footer: {
-					text: 'proto on dev stage',
+					text: 'proto on dev stage. version 1.2.0.2',
 				},
 			};
 			await interaction.reply({ embeds: [errorembed], ephemeral:false });
@@ -69,7 +109,7 @@ client.on(Events.InteractionCreate, async interaction => {
 					url: 'https://http.cat/417',
 				},
 				footer: {
-					text: 'proto on dev stage',
+					text: 'proto on dev stage. version 1.2.0.2',
 				},
 			};
 			await interaction.reply({ embeds: [errorembed], ephemeral:false });
@@ -95,7 +135,7 @@ client.on(Events.MessageCreate, async message => {
 				color: '#ff0000',
 				title: 'Nuevo reporte',
 				description: `He recibido un mensaje de ${message.author.tag}:\n ${dmreq}`,
-				footer:  'protoSUDO v0.0.4C',
+				footer:  'protoSUDO v1.2.0.2',
 			};
 
 			try {
