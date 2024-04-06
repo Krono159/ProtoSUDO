@@ -44,7 +44,7 @@ stdin.addListener('data', function(kswtch) {
 	// with toString() and then trim()
 	// fragment taken from https://stackoverflow.com/questions/8128578/reading-value-from-console-interactively and https://stackoverflow.com/questions/71485230/how-do-i-logout-my-discordbot-in-js-savely-with-a-command
 	// modified to function with Hades
-	if (kswtch.toString().trim() != 'killon' && kswtch.toString().trim() != 'killoff') {
+	if (kswtch.toString().trim() != 'killon' && kswtch.toString().trim() != 'killoff' && kswtch.toString().trim() != 'killoff ' + pwd) {
 		console.log('command entered: [' + kswtch.toString().trim() + '] is incorrect. Commands from console: enable killswitch: \'killon\', disable killswitch: \'killoff\'');
 	}
 	if (kswtch.toString().trim() == 'killon' && killstatus == 0) {
