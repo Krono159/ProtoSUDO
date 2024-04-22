@@ -1,7 +1,9 @@
 const { SlashCommandBuilder } = require('discord.js');
-function delay(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
+const ping = require('../../InternalModules/ping')
+const logger = require('../../InternalModules/logger')
+const print = require('../../InternalModules/Pythonfy')
+const directory = 'ping'
+const targetAdress = 'www.google.com'
 module.exports = {
 
 	data: new SlashCommandBuilder()
@@ -10,12 +12,21 @@ module.exports = {
 
 	async execute(interaction) {
 		await interaction.reply('testing latency');
-		const timestamp = Date.now();
-		// Calculate the ping latency
-		const latency = Date.now() - timestamp;
-		await delay(1000);
-		// Edit the message with the ping latency
-		interaction.followUp(`ping test completed! latency: ${latency}ms`);
+
+
+		ping(targetAdress, (error, latency) => {
+			if (error) {
+				logger(`ERROR: Ping has failed. module: ${directory};;; target: ${targetAdress};;; error: ${error}`,directory,'FATAL')
+				print('Error:', error);
+				interaction.followUp(`ping test failed. error: ${error}`);
+			} else {
+				logger(`tested ping: results: ${latency}`,directory,'info')
+				print('Latencia:', latency, 'ms');
+				interaction.followUp(`ping test completed! latency: ${latency}ms`);
+			}
+		});
+
+		
 	},
 
 };
