@@ -1,9 +1,0 @@
-
-{
-	"clientId": "client id here",
-	"guildId": "guild id here",
-	"DELCHAN_ID":"delchan id here",
-	"REPCHAN_ID":"report channel id here",
-	"channel_id" : "channel id here",
-	"pwd": "kswitch password here"
-}

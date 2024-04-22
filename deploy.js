@@ -1,10 +1,9 @@
 const { REST, Routes } = require('discord.js');
-const { clientId, guildId } = require('./config.json');
+const { clientId } = require('./config.json');
 const { token } = require('./tkn.json');
 const fs = require('node:fs');
 const path = require('node:path');
 const chalk = require('chalk');
-const { exitCode, exit } = require('node:process');
 
 
 const commands = [];
@@ -37,6 +36,7 @@ const rest = new REST().setToken(token);
 		console.log(chalk.red('removing commands from global scope if any'));
 		rest.put(Routes.applicationCommands(clientId), { body: [] });
 		console.log(chalk.red('commands removed'));
+
 		try {
 			const data = rest.put(
 				Routes.applicationCommands(clientId),
@@ -52,8 +52,9 @@ const rest = new REST().setToken(token);
 		try {
 			console.log(chalk.red(`ERROR: CANT PUSH COMMANDS: ${error}`));
 		}
-		catch (error) {
+		catch (err2) {
 			console.log('no commands to remove or unknown error removing commands, logging error');
+			console.log(err2);
 		}
 	}
 
