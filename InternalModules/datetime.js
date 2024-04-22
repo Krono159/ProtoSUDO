@@ -4,10 +4,10 @@
 function getTime() {
 	const now = new Date();
 	// Offset de GMT-5
-	const utcOffset = 0; 
+	const utcOffset = 0;
 	// Ajuste de utcOffset en milisegundos
 	const utcOffsetMilliseconds = utcOffset * 60 * 60 * 1000;
-	const gmtMinus5 = new Date(now.getTime() + utcOffsetMilliseconds); 
+	const gmtMinus5 = new Date(now.getTime() + utcOffsetMilliseconds);
 	const year = gmtMinus5.getFullYear();
 	const month = String(gmtMinus5.getMonth() + 1).padStart(2, '0');
 	const day = String(gmtMinus5.getDate()).padStart(2, '0');
