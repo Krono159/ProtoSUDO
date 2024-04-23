@@ -15,9 +15,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
-function print(string) {
-	console.log(string);
-}
+const print = require('./InternalModules/Pythonfy.js')
 for (const folder of commandFolders) {
 	const commandsPath = path.join(foldersPath, folder);
 	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -29,7 +27,7 @@ for (const folder of commandFolders) {
 		}
 		else {
 			print(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-			logger(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`, 'index', 'WARN');
+			logger(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`, 'index','WARN');
 		}
 	}
 }
@@ -40,18 +38,18 @@ stdin.addListener('data', function(kswtch) {
 	// with toString() and then trim()
 	// fragment taken from https://stackoverflow.com/questions/8128578/reading-value-from-console-interactively and https://stackoverflow.com/questions/71485230/how-do-i-logout-my-discordbot-in-js-savely-with-a-command
 	// modified to function with Hades
-	if (kswtch.toString().trim() != 'killon' && kswtch.toString().trim() != 'killoff' && kswtch.toString().trim() != 'killoff ' + pwd) {
+	if (kswtch.toString().trim() != 'killon' && kswtch.toString().trim() != 'killoff'&& kswtch.toString().trim() != 'killoff '+ pwd) {
 		print('command entered: [' + kswtch.toString().trim() + '] is incorrect. Commands from console: enable killswitch: \'killon\', disable killswitch: \'killoff\'');
 	}
 	if (kswtch.toString().trim() == 'killon' && killstatus == 0) {
-		logger(`INFO: killswitch started at ${getTime()}`, 'index', 'INFO');
+		logger(`INFO: killswitch started at ${getTime()}`, 'index','INFO');
 
 		try {
 			client.destraoy();
 			print('killswitch activated successfully, to enable bot again, use command "killoff"');
-			logger(`killswitch on, bot deactivated at ${getTime()}`, 'index', 'INFO');
+			logger(`killswitch on, bot deactivated at ${getTime()}`, 'index','INFO');
 			killstatus = 1;
-			print('por que... maestro... Solo queria ver la luz del día por ultima vez...');
+			print('por que... maestro... Solo queria ver la luz del día por ultima vez...')
 		}
 		catch (error) {
 			try {

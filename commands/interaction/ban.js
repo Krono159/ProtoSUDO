@@ -1,8 +1,8 @@
 const { SlashCommandBuilder } = require('discord.js');
-const logger = require('../../InternalModules/logger')
-const print = require('../../InternalModules/Pythonfy')
-const directory = 'ban'
-const counter = 0
+const logger = require('../../InternalModules/logger');
+const print = require('../../InternalModules/Pythonfy');
+const directory = 'ban';
+const counter = 0;
 module.exports = {
 
 	data: new SlashCommandBuilder()
@@ -22,12 +22,13 @@ module.exports = {
 		const guilty = interaction.member.displayName;
 		try {
 			await interaction.reply('https://http.cat/403.png');
-			logger(`INFO: ${directory} command has been used ${counter} times since last reboot\nINFO: image: https://http.cat/403.png , dum dum: ${guilty}`, directory,'info')
+			logger(`INFO: ${directory} command has been used ${counter} times since last reboot\nINFO: image: https://http.cat/403.png , dum dum: ${guilty}`, directory, 'info');
 			print(`${directory} command has been used ${counter} times since last reboot`);
-		} catch (error) {
+		}
+		catch (error) {
 			await interaction.reply('cant generate the interaction. pls report to <@610937299903184898> :<\nhttps://http.cat/400');
 			print('cant generate the neko... check logs to validate');
-			logger(`ERROR: ${directory} command has failed. Error: ${error}`,`${directory}`,'FATAL');
+			logger(`ERROR: ${directory} command has failed. Error: ${error}`, `${directory}`, 'FATAL');
 		}
 
 	},

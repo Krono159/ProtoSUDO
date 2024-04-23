@@ -1,11 +1,6 @@
 const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
-const winston = require('winston');
 const chalk = require('chalk');
-const logger = winston.createLogger({
-	transports: [
-		new winston.transports.Console(),
-	],
-});
+
 module.exports = {
 
 	data: new SlashCommandBuilder()
