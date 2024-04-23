@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 function ping(url, callback) {
 	const command = process.platform === 'win32' ? `ping ${url}` : `ping -c 4 ${url}`;
 
-	exec(command, (error, stdout, stderr) => {
+	exec(command, (error, stdout) => {
 		if (error) {
 			callback(error);
 			return;
@@ -11,8 +11,8 @@ function ping(url, callback) {
 
 		// Extraer la latencia de la salida
 		const lines = stdout.split('\n');
-		const latencyLine = lines[lines.length - 2]; // La penúltima línea contiene la información de latencia
-		const latencyMatch = /\d+.\d+/.exec(latencyLine); // Buscar el número de la latencia en la línea
+		const latencyLine = lines[lines.length - 2];
+		const latencyMatch = /\d+.\d+/.exec(latencyLine);
 
 		if (latencyMatch) {
 			const latency = parseFloat(latencyMatch[0]);

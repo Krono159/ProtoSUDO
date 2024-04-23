@@ -14,14 +14,15 @@ module.exports = {
 		.setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator),
 
 	async execute(interaction) {
-		interaction.reply('si el bot no responde con un followup, esto significa que el killswitch ha sido activado')
+		interaction.reply('si el bot no responde con un followup, esto significa que el killswitch ha sido activado');
 		try {
 			AKS();
 
-		} catch (error) {
+		}
+		catch (error) {
 			await interaction.followup('Error al matar a Hades, contactar con <@610937299903184898> para un apagado manual');
 		}
-		await interaction.followup('Error al ejecutar el killswitch')
-		
+		await interaction.followup('Error al ejecutar el killswitch');
+
 	},
 };

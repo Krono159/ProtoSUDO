@@ -2,9 +2,9 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { Client: NbClient } = require('nekos-best.js');
 const nekoClient = new NbClient();
 let counter = 0;
-const logger = require('../../InternalModules/logger')
-const print = require('../../InternalModules/Pythonfy')
-const directory = 'blush'
+const logger = require('../../InternalModules/logger');
+const print = require('../../InternalModules/Pythonfy');
+const directory = 'blush';
 module.exports = {
 
 	data: new SlashCommandBuilder()
@@ -24,15 +24,15 @@ module.exports = {
 			const nekoName = nekoanswer.anime_name;
 			const logEmbed = new EmbedBuilder().setColor('#0000ff').setDescription(`${tgt} hizo sonrojar a **${guilty}**!`).setImage(nekoUrl).setFooter({ text: 'anime: ' + nekoName });
 			counter += 1;
-			logger(`INFO: ${directory} command has been used ${counter} times since last reboot\nINFO: image: ${image}, name: ${choice}`, directory,'info')
+			logger(`INFO: ${directory} command has been used ${counter} times since last reboot\nINFO: image: ${nekoUrl}, name: ${nekoName}`, directory, 'info');
 			print(`${directory} command has been used ${counter} times since last reboot`);
-			print(`image: ${image}, name: ${choice}`);
+			print(`image: $image: ${nekoUrl}, name: ${nekoName}`);
 			await interaction.reply({ embeds: [logEmbed] });
 		}
 		catch (error) {
 			await interaction.reply('cant generate the interaction. pls report to <@610937299903184898> :<\nhttps://http.cat/400');
 			print('cant generate the neko... check logs to validate');
-			logger(`ERROR: ${directory} command has failed. Error: ${error}`,`${directory}`,'FATAL');
+			logger(`ERROR: ${directory} command has failed. Error: ${error}`, `${directory}`, 'FATAL');
 
 		}
 	},
